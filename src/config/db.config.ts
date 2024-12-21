@@ -1,6 +1,7 @@
 import { DataSource } from "typeorm";
 import { db_database, db_host, db_password, db_port, db_type, db_username } from "../shared/constants";
 import { Equipo } from "../entities/equipo";
+import { Rol } from "../entities/rol";
 
 
 export const AppDataSource = new DataSource({
@@ -10,5 +11,5 @@ export const AppDataSource = new DataSource({
     username: db_username,
     password: db_password,
     database: db_database,
-    entities: [Equipo],
+    entities: [Equipo,Rol],
 });
