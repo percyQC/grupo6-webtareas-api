@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Usuario } from "./usuario";
 
 @Entity('roles')
 export class Rol{
@@ -13,5 +14,9 @@ export class Rol{
 
     @CreateDateColumn({name: 'fecha_creacion_auditoria'})
     fechaCreacionAuditoria: Date;
+
+
+    @OneToMany(()=>Usuario,(usuario)=>usuario.rol)
+    usuarios: Usuario[];
 
 }
