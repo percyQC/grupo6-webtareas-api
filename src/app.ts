@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import equipoRouter from './routes/equipo.route';
 import rolRouter from './routes/rol.route';
 import { AppDataSource} from './config/db.config';
+import usuarioRouter from './routes/usuario.route';
 
 
 const app: Application = express();
@@ -11,6 +12,7 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use('/api/v1/equipo',equipoRouter);
 app.use('/api/v1/rol',rolRouter);
+app.use('/api/v1/usuario',usuarioRouter);
 
 
 export const startServer = async ()=>{
