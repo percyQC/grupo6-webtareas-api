@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Rol } from "./rol";
+import { Tarea } from "./tarea";
 
 @Entity('usuarios')
 export class Usuario{
@@ -30,5 +31,8 @@ export class Usuario{
     
     @CreateDateColumn({name: 'fecha_creacion_auditoria'})
     fechaCreacionAuditoria: Date;
+
+    @OneToMany(()=>Tarea,(tarea)=>tarea.usuario)
+    tareas: Tarea[];
 
 }

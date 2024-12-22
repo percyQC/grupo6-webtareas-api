@@ -3,6 +3,8 @@ import { db_database, db_host, db_password, db_port, db_type, db_username } from
 import { Equipo } from "../entities/equipo";
 import { Rol } from "../entities/rol";
 import { Usuario } from "../entities/usuario";
+import { Tarea } from "../entities/tarea";
+import { TipoTarea } from "../entities/tipo-tarea";
 
 
 export const AppDataSource = new DataSource({
@@ -12,5 +14,5 @@ export const AppDataSource = new DataSource({
     username: db_username,
     password: db_password,
     database: db_database,
-    entities: [Equipo,Rol,Usuario],
+    entities: [Equipo,Rol,Usuario,Tarea,TipoTarea],
 });
