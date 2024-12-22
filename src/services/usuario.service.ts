@@ -10,11 +10,14 @@ export const insertarUsuario= async (data: Partial<Usuario>): Promise<Usuario>  
 }
 
 export const listarUsuario = async (): Promise<Usuario[]> =>{
-    return await repository.find({where: {estadoAuditoria: EstadoAuditoria.ACTIVO}});
+    return await repository.find({
+        where: {estadoAuditoria: EstadoAuditoria.ACTIVO},
+        relations: ['rol'],
+    });
 }
 
 export const obtenerUsuario = async (idUsuario: number ) : Promise<Usuario> => {
-    return await repository.findOne({ where: { idUsuario , estadoAuditoria: EstadoAuditoria.ACTIVO } });  
+    return await repository.findOne({ where: { idUsuario , estadoAuditoria: EstadoAuditoria.ACTIVO },relations: ['rol'] });  
 }
 
 export const actualizarUsuario = async (idUsuario: number, data: Partial<Usuario>) => {

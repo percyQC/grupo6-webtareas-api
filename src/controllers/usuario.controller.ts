@@ -19,7 +19,7 @@ export const insertarUsuario = async (req: Request, res: Response) => {
 export const listarUsuario = async (req: Request, res: Response) => {
     try {
         console.log('listarUsuario');
-        const usuarios: Usuario[] = await UsuarioService.listarUsuario();        
+        const usuarios: Usuario[] = await UsuarioService.listarUsuario();              
         res.json(BaseResponse.success(usuarios));
     } catch (error) {
         console.error(error);
