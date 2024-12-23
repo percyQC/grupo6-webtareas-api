@@ -1,5 +1,6 @@
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Tarea } from "./tarea";
+import { Asignacion } from "./asignacion";
 
 @Entity('equipos')
 export class Equipo{
@@ -19,6 +20,6 @@ export class Equipo{
     fechaCreacionAuditoria: Date;
 
     @OneToMany(()=>Tarea,(tarea)=>tarea.equipo)
-    tareas: Tarea[];
+    tareas: Tarea[]; 
 
 }

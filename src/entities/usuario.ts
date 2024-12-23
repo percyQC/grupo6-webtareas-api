@@ -1,6 +1,8 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Rol } from "./rol";
 import { Tarea } from "./tarea";
+import { Asignacion } from "./asignacion";
+import { Subtarea } from "./subtarea";
 
 @Entity('usuarios')
 export class Usuario{
@@ -34,5 +36,12 @@ export class Usuario{
 
     @OneToMany(()=>Tarea,(tarea)=>tarea.usuario)
     tareas: Tarea[];
+
+    @OneToMany(()=>Asignacion,(asignacion)=>asignacion.usuario)
+    asignaciones: Asignacion[];
+
+    @OneToMany(()=>Subtarea,(subtarea)=>subtarea.usuario)
+    subtareas: Subtarea[];
+    
 
 }

@@ -1,7 +1,9 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { TipoTarea } from "./tipo-tarea";
 import { Equipo } from "./equipo";
 import { Usuario } from "./usuario";
+import { Asignacion } from "./asignacion";
+import { Subtarea } from "./subtarea";
 
 @Entity('tareas')
 export class Tarea{
@@ -58,5 +60,11 @@ export class Tarea{
     
     @CreateDateColumn({name: 'fecha_creacion_auditoria'})
     fechaCreacionAuditoria: Date;
+
+    @OneToMany(()=>Asignacion,(asignacion)=>asignacion.tarea)
+    asignaciones: Asignacion[];
+
+    @OneToMany(()=>Subtarea,(subtarea)=>subtarea.tarea)
+    subtareas: Subtarea[];
 
 }
