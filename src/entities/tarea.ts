@@ -6,7 +6,7 @@ import { Usuario } from "./usuario";
 @Entity('tareas')
 export class Tarea{
     @PrimaryGeneratedColumn({name:'id_tarea'})
-    idUsuario: number;
+    idTarea: number;
     
     @Column({name:'nombre'})
     nombre: string;
