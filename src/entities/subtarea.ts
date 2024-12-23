@@ -27,11 +27,11 @@ export class Subtarea {
 
     @ManyToOne(()=>Tarea,(tarea)=>tarea.subtareas)
     @JoinColumn({name: 'id_tarea'})
-    tareas: Tarea; 
+    tarea: Tarea; 
 
-    @ManyToOne(()=>Usuario,(usuario)=>usuario.tareas)
+    @ManyToOne(()=>Usuario,(usuario)=>usuario.subtareas)
     @JoinColumn({name: 'id_usuario_asignado'})
-    usuarios: Usuario; 
+    usuario: Usuario; 
 
     @Column({name: 'estado_auditoria'})
     estadoAuditoria: string;

@@ -64,7 +64,7 @@ export class Tarea{
     @OneToMany(()=>Asignacion,(asignacion)=>asignacion.tarea)
     asignaciones: Asignacion[];
 
-    @OneToMany(()=>Subtarea,(subtarea)=>subtarea.tareas)
+    @OneToMany(()=>Subtarea,(subtarea)=>subtarea.tarea)
     subtareas: Subtarea[];
 
 }

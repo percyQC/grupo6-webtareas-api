@@ -40,7 +40,7 @@ export class Usuario{
     @OneToMany(()=>Asignacion,(asignacion)=>asignacion.usuario)
     asignaciones: Asignacion[];
 
-    @OneToMany(()=>Subtarea,(subtarea)=>subtarea.usuarios)
+    @OneToMany(()=>Subtarea,(subtarea)=>subtarea.usuario)
     subtareas: Subtarea[];
     
 

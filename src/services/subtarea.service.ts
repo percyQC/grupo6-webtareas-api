@@ -10,12 +10,16 @@ export const insertarSubtarea = async (data: Partial<Subtarea>): Promise<Subtare
 };
 
 export const listarSubtareas = async (): Promise<Subtarea[]> => {
-    return await repository.find({ where: { estadoAuditoria: EstadoAuditoria.ACTIVO } });
+    return await repository.find({ 
+        where: { estadoAuditoria: EstadoAuditoria.ACTIVO },
+        relations: ['tarea','usuario']
+     });
 };
 
 export const obtenerSubtarea = async (idSubtarea: number): Promise<Subtarea> => {
     return await repository.findOne({
         where: { idSubtarea: idSubtarea, estadoAuditoria: EstadoAuditoria.ACTIVO },
+        relations: ['tarea','usuario']
     });
 };
 
