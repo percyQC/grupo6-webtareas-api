@@ -5,6 +5,7 @@ import rolRouter from './routes/rol.route';
 import { AppDataSource} from './config/db.config';
 import usuarioRouter from './routes/usuario.route';
 import tareaRouter from './routes/tarea.route';
+import asignacionRouter from './routes/asignacion.route';
 
 const app: Application = express();
 
@@ -14,6 +15,7 @@ app.use('/api/v1/equipo',equipoRouter);
 app.use('/api/v1/rol',rolRouter);
 app.use('/api/v1/usuario',usuarioRouter);
 app.use('/api/v1/tarea',tareaRouter);
+app.use('/api/v1/asignacion',asignacionRouter);
 
 
 export const startServer = async ()=>{

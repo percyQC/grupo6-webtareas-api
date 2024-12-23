@@ -23,7 +23,7 @@ export const obtenerAsignacion = async (idAsignacion: number): Promise<Asignacio
     });
 }
 
-export const actualizarAsignacion = async (idAsignacion: number, data: Partial<Asignacion>): Promise<Asignacion> => {
+export const actualizarAsignacion = async (idAsignacion: number, data: Partial<Asignacion>) => {
     await repository.update(idAsignacion, data);
     return obtenerAsignacion(idAsignacion);
 }

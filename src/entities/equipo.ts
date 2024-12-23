@@ -20,9 +20,6 @@ export class Equipo{
     fechaCreacionAuditoria: Date;
 
     @OneToMany(()=>Tarea,(tarea)=>tarea.equipo)
-    tareas: Tarea[];
-
-    @OneToMany(()=>Asignacion,(asignacion)=>asignacion.equipo)
-    asignaciones: Asignacion[];
+    tareas: Tarea[]; 
 
 }
