@@ -2,6 +2,7 @@ import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, Pri
 import { Rol } from "./rol";
 import { Tarea } from "./tarea";
 import { Asignacion } from "./asignacion";
+import { Subtarea } from "./subtarea";
 
 @Entity('usuarios')
 export class Usuario{
@@ -38,6 +39,9 @@ export class Usuario{
 
     @OneToMany(()=>Asignacion,(asignacion)=>asignacion.usuario)
     asignaciones: Asignacion[];
+
+    @OneToMany(()=>Subtarea,(subtarea)=>subtarea.usuarios)
+    subtareas: Subtarea[];
     
 
 }

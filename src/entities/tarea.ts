@@ -3,6 +3,7 @@ import { TipoTarea } from "./tipo-tarea";
 import { Equipo } from "./equipo";
 import { Usuario } from "./usuario";
 import { Asignacion } from "./asignacion";
+import { Subtarea } from "./subtarea";
 
 @Entity('tareas')
 export class Tarea{
@@ -62,5 +63,8 @@ export class Tarea{
 
     @OneToMany(()=>Asignacion,(asignacion)=>asignacion.tarea)
     asignaciones: Asignacion[];
+
+    @OneToMany(()=>Subtarea,(subtarea)=>subtarea.tareas)
+    subtareas: Subtarea[];
 
 }
