@@ -6,6 +6,7 @@ import { AppDataSource} from './config/db.config';
 import usuarioRouter from './routes/usuario.route';
 
 
+
 const app: Application = express();
 
 app.use(express.json());

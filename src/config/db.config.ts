@@ -5,6 +5,7 @@ import { Rol } from "../entities/rol";
 import { Usuario } from "../entities/usuario";
 
 
+
 export const AppDataSource = new DataSource({
     type: db_type as any,
     host: db_host,
