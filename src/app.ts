@@ -1,8 +1,8 @@
 import express,{Application} from 'express';
 import morgan from 'morgan';
+import { AppDataSource} from './config/db.config';
 import equipoRouter from './routes/equipo.route';
 import rolRouter from './routes/rol.route';
-import { AppDataSource} from './config/db.config';
 import usuarioRouter from './routes/usuario.route';
 import tareaRouter from './routes/tarea.route';
 import asignacionRouter from './routes/asignacion.route';
