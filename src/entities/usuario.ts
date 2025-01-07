@@ -18,6 +18,12 @@ export class Usuario{
     @Column({name:'apellido_materno'})
     ApellidoMaterno: string;
 
+    @Column ({name:'tipo_documento'})
+    tipoDocumento: string;
+
+    @Column ({name:'numero_documento'})
+    numeroDocumento: string;
+
     @Column({name:'correo'})
     correo: string;
 
