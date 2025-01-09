@@ -3,6 +3,7 @@ import { Rol } from "./rol";
 import { Tarea } from "./tarea";
 import { Asignacion } from "./asignacion";
 import { Subtarea } from "./subtarea";
+import { usuarioEquipo } from "./usuario-equipo";
 
 @Entity('usuarios')
 export class Usuario{
@@ -48,6 +49,9 @@ export class Usuario{
 
     @OneToMany(()=>Subtarea,(subtarea)=>subtarea.usuario)
     subtareas: Subtarea[];
+
+    @OneToMany(()=>usuarioEquipo,(usuarioequipo)=>usuarioequipo.usuario)
+    usuarioequipo: usuarioEquipo[];
     
 
 }

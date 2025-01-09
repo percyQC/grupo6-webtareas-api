@@ -7,6 +7,7 @@ import usuarioRouter from './routes/usuario.route';
 import tareaRouter from './routes/tarea.route';
 import asignacionRouter from './routes/asignacion.route';
 import subtareaRouter from './routes/subtarea.router';
+import usuarioEquipoRouter from './routes/usuario-equipo.route';
 
 const app: Application = express();
 
@@ -18,6 +19,7 @@ app.use('/api/v1/usuario',usuarioRouter);
 app.use('/api/v1/tarea',tareaRouter);
 app.use('/api/v1/asignacion',asignacionRouter);
 app.use('/api/v1/subtarea',subtareaRouter);
+app.use('/api/v1/usuarioEquipo',usuarioEquipoRouter);
 
 
 export const startServer = async ()=>{

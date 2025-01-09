@@ -7,6 +7,7 @@ import { Tarea } from "../entities/tarea";
 import { TipoTarea } from "../entities/tipo-tarea";
 import { Asignacion } from "../entities/asignacion";
 import { Subtarea } from "../entities/subtarea";
+import { usuarioEquipo } from "../entities/usuario-equipo";
 
 
 export const AppDataSource = new DataSource({
@@ -16,5 +17,5 @@ export const AppDataSource = new DataSource({
     username: db_username,
     password: db_password,
     database: db_database,
-    entities: [Equipo,Rol,Usuario,Tarea,TipoTarea,Asignacion,Subtarea],
+    entities: [Equipo,Rol,Usuario,Tarea,TipoTarea,Asignacion,Subtarea,usuarioEquipo],
 });
