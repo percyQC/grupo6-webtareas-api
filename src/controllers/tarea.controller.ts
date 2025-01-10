@@ -3,7 +3,7 @@ import * as tareaService from '../services/tarea.service';
 import { BaseResponse } from '../shared/base-response';
 import { Message } from '../enums/message';
 import { Tarea } from '../entities/tarea';
-import { insertarTareaSchema } from '../validators/tarea.schema';
+import { actualizarTareaSchema, insertarTareaSchema } from '../validators/tarea.schema';
 
 export const insertarTarea = async (req: Request, res: Response) => {
     try {
@@ -52,6 +52,12 @@ export const obtenerTarea = async (req: Request, res: Response)=>{
 export const actualizarTarea = async (req: Request, res: Response)=>{
     try {
         const { idTarea } = req.params;
+
+        const { error } = actualizarTareaSchema.validate(req.body);
+        if(error){
+            res.status(400).json(BaseResponse.error(error.message,400));
+            return;
+        }
         const tarea: Partial<Tarea> = req.body;
         if(!(await tareaService.obtenerTarea(Number(idTarea)))){
             res.status(404).json(BaseResponse.error(Message.NOT_FOUND,404));
