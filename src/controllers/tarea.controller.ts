@@ -3,10 +3,16 @@ import * as tareaService from '../services/tarea.service';
 import { BaseResponse } from '../shared/base-response';
 import { Message } from '../enums/message';
 import { Tarea } from '../entities/tarea';
+import { insertarTareaSchema } from '../validators/tarea.schema';
 
 export const insertarTarea = async (req: Request, res: Response) => {
     try {
         console.log('insertarTarea')
+        const { error } = insertarTareaSchema.validate(req.body);
+        if(error){
+            res.status(400).json(BaseResponse.error(error.message,400));
+            return;
+        }
         const tarea: Partial<Tarea> = req.body;
         const newTarea: Tarea = await tareaService.insertarTarea(tarea)
         res.json(BaseResponse.success(newTarea,Message.INSERTADO_OK));
