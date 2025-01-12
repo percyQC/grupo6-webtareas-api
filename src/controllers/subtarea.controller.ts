@@ -3,10 +3,16 @@ import * as SubtareaService from '../services/subtarea.service';
 import { Subtarea } from '../entities/subtarea';
 import { BaseResponse } from '../shared/base-response';
 import { Message } from '../enums/message';
+import { actualizarSubTareaSchema, insertarSubTareaSchema } from '../validators/subtarea.schema';
 
 export const insertarSubtarea = async (req: Request, res: Response) => {
     try {
         console.log('insertarSubtarea');
+        const { error } = insertarSubTareaSchema.validate(req.body);
+        if(error){
+            res.status(400).json(BaseResponse.error(error.message,400));
+            return;
+        }
         const subtarea: Partial<Subtarea> = req.body;
         const newSubtarea: Subtarea = await SubtareaService.insertarSubtarea(subtarea);
         res.json(BaseResponse.success(newSubtarea, Message.INSERTADO_OK));
@@ -46,6 +52,11 @@ export const obtenerSubtarea = async (req: Request, res: Response) => {
 export const actualizarSubtarea = async (req: Request, res: Response) => {
     try {
         const { idSubtarea } = req.params;
+        const { error } = actualizarSubTareaSchema.validate(req.body);
+        if(error){
+            res.status(400).json(BaseResponse.error(error.message,400));
+            return;
+        }
         const subtarea: Partial<Subtarea> = req.body;
         if (!(await SubtareaService.obtenerSubtarea(Number(idSubtarea)))) {
             res.status(404).json(BaseResponse.error(Message.NOT_FOUND, 404));
