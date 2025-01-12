@@ -17,5 +17,5 @@ export const AppDataSource = new DataSource({
     username: db_username,
     password: db_password,
     database: db_database,
-    entities: [Equipo,Rol,Usuario,Tarea,TipoTarea,Asignacion,Subtarea,usuarioEquipo],
+    entities: [Equipo,Rol,Usuario,Tarea,TipoTarea,Asignacion,Subtarea,usuarioEquipo]
 });
