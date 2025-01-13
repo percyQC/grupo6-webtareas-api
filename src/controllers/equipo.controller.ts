@@ -3,12 +3,18 @@ import * as EquipoService from '../services/equipo.service';
 import { Equipo } from '../entities/equipo';
 import { BaseResponse } from '../shared/base-response';
 import { Message } from '../enums/message';
+import { actualizarEquipoSchema, insertarEquipoSchema } from '../validators/equipo.schema';
 
 
 
 export const insertarEquipo = async (req: Request, res: Response) => {
     try {
         console.log('insertarEquipo')
+        const { error } = insertarEquipoSchema.validate(req.body);
+        if(error){
+            res.status(400).json(BaseResponse.error(error.message,400));
+            return;
+        }
         const equipo: Partial<Equipo> = req.body;
         const newEquipo: Equipo = await EquipoService.insertarEquipo(equipo)
         res.json(BaseResponse.success(newEquipo,Message.INSERTADO_OK));
@@ -51,6 +57,11 @@ export const obtenerEquipo = async (req: Request, res: Response)=>{
 export const actualizarEquipo = async (req: Request, res: Response)=>{
     try {
         const { idEquipo } = req.params;
+        const { error } = actualizarEquipoSchema.validate(req.body);
+        if(error){
+            res.status(400).json(BaseResponse.error(error.message,400));
+            return;
+        }
         const equipo: Partial<Equipo> = req.body;
         if(!(await EquipoService.obtenerEquipo(Number(idEquipo)))){
             res.status(404).json(BaseResponse.error(Message.NOT_FOUND,404));

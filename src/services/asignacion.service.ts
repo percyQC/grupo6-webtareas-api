@@ -6,7 +6,9 @@ const repository = AppDataSource.getRepository(Asignacion);
 
 export const insertarAsignacion = async (data: Partial<Asignacion>) : Promise<Asignacion> => {
     const newAsignacion: Asignacion = await repository.save(data);
-    return await repository.findOne({where: {idAsignacion: newAsignacion.idAsignacion}});
+    return await repository.findOne({where: {idAsignacion: newAsignacion.idAsignacion},
+        relations:['tarea','usuario']
+    });
 }
 
 export const listarAsignacion = async (): Promise<Asignacion[]> => {

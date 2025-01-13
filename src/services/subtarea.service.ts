@@ -6,7 +6,9 @@ const repository = AppDataSource.getRepository(Subtarea);
 
 export const insertarSubtarea = async (data: Partial<Subtarea>): Promise<Subtarea> => {
     const newSubtarea: Subtarea = await repository.save(data);
-    return await repository.findOne({ where: { idSubtarea: newSubtarea.idSubtarea } });
+    return await repository.findOne({ where: { idSubtarea: newSubtarea.idSubtarea },
+        relations: ['tarea','usuario'] 
+    });
 };
 
 export const listarSubtareas = async (): Promise<Subtarea[]> => {

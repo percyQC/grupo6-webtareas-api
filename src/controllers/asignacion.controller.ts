@@ -3,10 +3,16 @@ import * as asignacionService from '../services/asignacion.service';
 import { Asignacion } from '../entities/asignacion';
 import { BaseResponse } from '../shared/base-response';
 import { Message } from '../enums/message';
+import { actualizarAsignacionSchema, insertarAsignacionSchema } from '../validators/asignacion.schema';
 
 export const insertarAsignacion = async (req: Request, res: Response) => {
     try {
       console.log('insertarAsignacion');
+      const { error } = insertarAsignacionSchema.validate(req.body);
+        if(error){
+            res.status(400).json(BaseResponse.error(error.message,400));
+            return;
+        }
       const asignacion: Partial<Asignacion> = req.body;
       const newAsignacion: Asignacion = await asignacionService.insertarAsignacion(asignacion);
       res.json(BaseResponse.success(newAsignacion, Message.INSERTADO_OK));
@@ -45,8 +51,13 @@ export const obtenerAsignacion = async (req: Request, res: Response) => {
 export const actualizarAsignacion = async (req: Request, res: Response) => {
     try {
         const {idAsignacion} = req.params;
+        const { error } = actualizarAsignacionSchema.validate(req.body);
+        if(error){
+            res.status(400).json(BaseResponse.error(error.message,400));
+            return;
+        }
         const asignacion: Partial<Asignacion> = req.body;
-        if((await asignacionService.obtenerAsignacion(Number(idAsignacion)))){
+        if(!(await asignacionService.obtenerAsignacion(Number(idAsignacion)))){
             res.status(404).json(BaseResponse.error(Message.NOT_FOUND,404));
             return;
         }

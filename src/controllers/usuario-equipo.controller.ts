@@ -3,12 +3,18 @@ import * as usuarioEquipoService from '../services/usuario-equipo.service';
 import { BaseResponse } from '../shared/base-response';
 import { Message } from '../enums/message';
 import { usuarioEquipo } from '../entities/usuario-equipo';
+import { actualizarUsuarioEquipoSchema, insertarUsuarioEquipoSchema } from '../validators/usuario-equipo.schema';
 
 
 
 export const insertarUsuarioEquipo = async (req: Request, res: Response) => {
     try {
         console.log('insertarUsuarioEquipo')
+        const { error } = insertarUsuarioEquipoSchema.validate(req.body);
+        if(error){
+            res.status(400).json(BaseResponse.error(error.message,400));
+            return;
+        }
         const usuarioequipo: Partial<usuarioEquipo> = req.body;
         const newUsuarioEquipo: usuarioEquipo = await usuarioEquipoService.insertarUsuarioEquipo(usuarioequipo)
         res.json(BaseResponse.success(newUsuarioEquipo,Message.INSERTADO_OK));
@@ -50,7 +56,13 @@ export const obtenerUsuarioEquipo = async (req: Request, res: Response)=>{
 
 export const actualizarUsuarioEquipo = async (req: Request, res: Response)=>{
     try {
+        console.log('actualizarUsuarioEquipo');
         const { idUsuarioEquipo } = req.params;
+        const { error } = actualizarUsuarioEquipoSchema.validate(req.body);
+        if(error){
+            res.status(400).json(BaseResponse.error(error.message,400));
+            return;
+        }
         const usuarioequipo: Partial<usuarioEquipo> = req.body;
         if(!(await usuarioEquipoService.obtenerUsuarioEquipo(Number(idUsuarioEquipo)))){
             res.status(404).json(BaseResponse.error(Message.NOT_FOUND,404));

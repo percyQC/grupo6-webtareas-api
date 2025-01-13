@@ -6,13 +6,15 @@ const repository = AppDataSource.getRepository(Usuario);
 
 export const insertarUsuario= async (data: Partial<Usuario>): Promise<Usuario>  => {
     const newUsuario: Usuario = await repository.save(data);
-    return await repository.findOne({where: {idUsuario: newUsuario.idUsuario}});    
+    return await repository.findOne({where: {idUsuario: newUsuario.idUsuario},
+        relations: ['rol']
+    });    
 }
 
 export const listarUsuario = async (): Promise<Usuario[]> =>{
     return await repository.find({
         where: {estadoAuditoria: EstadoAuditoria.ACTIVO},
-        relations: ['rol'],
+        relations: ['rol']
     });
 }
 
