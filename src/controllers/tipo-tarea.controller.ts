@@ -3,10 +3,16 @@ import * as TipoTareaService from '../services/tipo-tarea.service';
 import { TipoTarea } from '../entities/tipo-tarea';
 import { BaseResponse } from '../shared/base-response';
 import { Message } from '../enums/message';
+import { actualizarTipoTareaSchema, insertarTipoTareaSchema } from '../validators/tipo-tarea.schema';
 
 export const insertarTipoTarea = async (req: Request, res: Response) => {
     try {
         console.log('insertarTipoTarea');
+        const { error } = insertarTipoTareaSchema.validate(req.body);
+                if(error){
+                    res.status(400).json(BaseResponse.error(error.message,400));
+                    return;
+        }
         const tipoTarea: Partial<TipoTarea> = req.body;
         const newTipoTarea: TipoTarea = await TipoTareaService.insertarTipoTarea(tipoTarea);
         res.json(BaseResponse.success(newTipoTarea, Message.INSERTADO_OK));
@@ -46,6 +52,11 @@ export const obtenerTipoTarea = async (req: Request, res: Response) => {
 export const actualizarTipoTarea = async (req: Request, res: Response) => {
     try {
         const { idTipoTarea } = req.params;
+        const { error } = actualizarTipoTareaSchema.validate(req.body);
+                if(error){
+                    res.status(400).json(BaseResponse.error(error.message,400));
+                    return;
+        }
         const tipoTarea: Partial<TipoTarea> = req.body;
         if (!(await TipoTareaService.obtenerTipoTarea(Number(idTipoTarea)))) {
             res.status(404).json(BaseResponse.error(Message.NOT_FOUND, 404));
