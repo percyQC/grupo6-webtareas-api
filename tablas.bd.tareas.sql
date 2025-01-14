@@ -3,6 +3,8 @@ Table usuarios {
   nombre varchar(50) [not null]
   apellido_paterno varchar(100) [not null]
   apellido_materno varchar(100) [not null]
+  tipo_documento char(1) [not null] //Ejemplo: R=ruc,D=DNI,C=Extranjeria
+  numero_documento varchar(15) [not null]
   correo varchar(100) [not null, unique]
   clave varchar(100) [not null]
   id_rol int [ref: > roles.id_rol] // Ejemplo: Administrador, Colaborador
@@ -35,7 +37,7 @@ Table usuario_equipo {
 
 Table tareas {
   id_tarea int [pk, increment]
-  nombre varchar(255) [not null]
+  nombre varchar(200) [not null]
   descripcion varchar(500) [not null]
   id_tipo_tarea int [ref: > tipo_tareas.id_tipo_tarea]
   fecha_creacion timestamp [not null]
